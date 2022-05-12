@@ -42,7 +42,6 @@ while i < len(alex_time):
 
 i = 0
 
-#tu sie wypierdala
 while i < len(datetime_brian):
     date = datetime_brian[i + 1] - datetime_brian[i]
     if date >= day:
