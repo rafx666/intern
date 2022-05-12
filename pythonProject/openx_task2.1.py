@@ -3,28 +3,56 @@ from datetime import datetime
 brian = open("brian.txt", "r")
 alex = open("alex.txt", "r")
 
-brian_time = brian.read()
-alex_time = alex.read()
+brian_time = brian.readlines()
+alex_time = alex.readlines()
 
-brian_1 = brian_time[0:10]
-brian_2 = brian_time[11:30]
-brian_3 = brian_time[33:52]
+datetime_brian = []
+datetime_alex = []
 
-alex_1 = alex_time[0:19]
-alex_2 = alex_time[22:41]
+time_1 = datetime.strptime("2022-06-01 00:00:00", '%Y-%m-%d %H:%M:%S')
+time_2 = datetime.strptime("2022-06-01 00:30:00", '%Y-%m-%d %H:%M:%S')
+time_3 = datetime.strptime("2022-06-02 00:00:00", '%Y-%m-%d %H:%M:%S')
 
-time_now = "2022-07-01 09:00:00"
+half_hour = time_2 - time_1
+day = time_3 - time_1
 
-datetime_brian_1 = datetime.strptime(brian_1, '%Y-%m-%d')
-datetime_brian_2 = datetime.strptime(brian_2, '%Y-%m-%d %H:%M:%S')
-datetime_brian_3 = datetime.strptime(brian_3, '%Y-%m-%d %H:%M:%S')
-datetime_alex_1 = datetime.strptime(alex_1, '%Y-%m-%d %H:%M:%S')
-datetime_alex_2 = datetime.strptime(alex_2, '%Y-%m-%d %H:%M:%S')
-datetime_now = datetime.strptime(time_now, '%Y-%m-%d %H:%M:%S')
+i = 0
+while i < len(brian_time):
+    if len(brian_time[i]) == 11:
+        datetime_brian.append(datetime.strptime(brian_time[i][0:10], '%Y-%m-%d'))
+    elif len(brian_time[i]) > 11:
+        brian_time_list = brian_time[i].split(" - ")
+        d = 0
+        while d < 2:
+            datetime_brian.append(datetime.strptime(brian_time_list[d], '%Y-%m-%d %H:%M:%S'))
+            d += 1
+    i += 1
 
-print(datetime_now)
-print(type(datetime_now))
+i = 0
+while i < len(alex_time):
+    if len(alex_time[i]) == 11:
+        datetime_alex.append(datetime.strptime(alex_time[i][0:10], '%Y-%m-%d'))
+    elif len(alex_time[i]) > 11:
+        alex_time_list = alex_time[i].split(" - ")
+        d = 0
+        while d < 2:
+            datetime_alex.append(datetime.strptime(alex_time_list[d], '%Y-%m-%d %H:%M:%S'))
+            d += 1
+    i += 1
 
+i = 0
+
+#tu sie wypierdala
+while i < len(datetime_brian):
+    date = datetime_brian[i + 1] - datetime_brian[i]
+    if date >= day:
+        print("szukamy czasu między 2 i 3 elementem listy")
+    else:
+        print("szukamy czasu między 1 i 2 elementem listy")
+    i += 1
+  
+"""
 def calendars(duration_in_minutes, minimum_people):
     pass
 
+"""
