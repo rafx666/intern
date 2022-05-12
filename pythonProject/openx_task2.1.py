@@ -1,7 +1,7 @@
 from datetime import datetime
 
-brian = open("D:\\DESKTOP/brian.txt", "r")
-alex = open("D:\\DESKTOP/alex.txt", "r")
+brian = open("brian.txt", "r")
+alex = open("alex.txt", "r")
 
 brian_time = brian.read()
 alex_time = alex.read()
