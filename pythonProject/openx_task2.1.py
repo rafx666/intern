@@ -1,4 +1,5 @@
 from datetime import datetime
+import pandas as pd
 
 brian = open("brian.txt", "r")
 alex = open("alex.txt", "r")
@@ -12,9 +13,14 @@ datetime_alex = []
 time_1 = datetime.strptime("2022-06-01 00:00:00", '%Y-%m-%d %H:%M:%S')
 time_2 = datetime.strptime("2022-06-01 00:30:00", '%Y-%m-%d %H:%M:%S')
 time_3 = datetime.strptime("2022-06-02 00:00:00", '%Y-%m-%d %H:%M:%S')
+time_4 = datetime.strptime("2022-06-01 00:00:01", '%Y-%m-%d %H:%M:%S')
+datetime_end = datetime.strptime("2022-07-03 00:00:00", '%Y-%m-%d %H:%M:%S')
+time_5 = datetime.strptime("2022-06-01 00:01:00", '%Y-%m-%d %H:%M:%S')
 
+sec = time_4 - time_1
 half_hour = time_2 - time_1
 day = time_3 - time_1
+one_min = time_5 - time_1
 
 i = 0
 while i < len(brian_time):
@@ -41,17 +47,37 @@ while i < len(alex_time):
     i += 1
 
 i = 0
-
-while i < len(datetime_brian):
-    date = datetime_brian[i + 1] - datetime_brian[i]
-    if date >= day:
-        print("szukamy czasu między 2 i 3 elementem listy")
+while i < (len(datetime_brian)-1):
+    date_b = datetime_brian[i + 1] - datetime_brian[i]
+    if date_b < half_hour:
+        pass
+    elif half_hour < date_b < day:
+        range_brian_set = set(pd.date_range(start=datetime_brian[i + 1],end=datetime_end, freq='s'))
     else:
-        print("szukamy czasu między 1 i 2 elementem listy")
+        if datetime_brian[i + 1] == (datetime_brian[i] + day): #to znaczy ze druga data jest rowno 24h po pierwszej, nie ma mozliwosci zaplanowac spotkania miedzy 1 i 2 datą
+            pass
+        else:
+            range_brian_set = set(pd.date_range((datetime_brian[i] + day) , datetime_brian[i + 1], freq='s'))
     i += 1
-  
-"""
-def calendars(duration_in_minutes, minimum_people):
-    pass
 
-"""
+#range_brian_set - zbior elementow gdzie brian moze spotkanie
+i = 0
+while i < (len(datetime_alex)-1):
+    date_a = datetime_alex[i + 1] - datetime_alex[i]
+    if date_a < half_hour:
+        pass
+    elif half_hour < date_a < day:
+        range_alex_set = set(pd.date_range(start=datetime_alex[i + 1], end=datetime_end, freq='s'))
+    else:
+        if datetime_alex[i + 1] == (datetime_alex[i] + day): #to znaczy ze druga data jest rowno 24h po pierwszej, nie ma mozliwosci zaplanowac spotkania miedzy 1 i 2 datą
+            pass
+        else:
+            range_alex_set = set(pd.date_range((datetime_alex[i] + day), datetime_alex[i + 1], freq='s'))
+    i += 1
+
+common_part = range_brian_set.intersection(range_alex_set)
+meeting_time = min(common_part) + sec
+print(meeting_time)
+
+
+print(2*one_min)

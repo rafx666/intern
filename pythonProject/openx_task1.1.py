@@ -35,7 +35,7 @@ while i < len(j_url_main["sellers"]):   #while i is smaller than lenght of list 
     if i == index: #if number of seller matches the index of Ascendum seller which has sellers under him
         d = 0
         while d < len(j_url_asc["sellers"]):    #while d is smaller than lenght of list of sellers under Ascendum
-            print("\t seller:  {},    seller type:  {}".format(j_url_main["sellers"][index]["sellers"][d]["name"], j_url_main["sellers"][index]["sellers"][d]["seller_type"]))
+            print("\t \t \t seller:  {},    seller type:  {}".format(j_url_main["sellers"][index]["sellers"][d]["name"], j_url_main["sellers"][index]["sellers"][d]["seller_type"]))
             d += 1  #it prints out sellers names and types, but the data is tabbed so its more visible
     else:
         pass
