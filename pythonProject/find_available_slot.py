@@ -130,4 +130,4 @@ def calendars(duration_in_minutes, minimum_people):     #defining the calendars 
     else:
         print("Not enough people available.")   #last condition
 
-calendars(30, 2)
+calendars(30, 2)    #calling out the function with arguments: duration_in_minutes = 30, minimum_people = 2
